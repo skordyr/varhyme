@@ -85,7 +85,7 @@ export interface Tokens<TTokensValue extends TokensValue> {
 export type InferTokensConfig<TTokens extends Tokens<any>> =
   TTokens extends Tokens<infer TTokenValue> ? TokensConfig<TTokenValue> : never;
 
-const TOKENS_BRAND = Symbol("varena.tokens");
+const TOKENS_BRAND = Symbol("varhyme.tokens");
 
 export function isTokens(target: unknown): target is Tokens<any> {
   const candidate = target as { [TOKENS_BRAND]: true };

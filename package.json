@@ -1,16 +1,24 @@
 {
-  "name": "varena",
+  "name": "varhyme",
   "version": "0.4.14",
-  "description": "A framework-agnostic, type-safe styling library for building component variants and design tokens, with first-class slots support. Inspired by `stitches`.",
-  "homepage": "https://github.com/skordyr/varena#readme",
+  "description": "A framework-agnostic, type-safe styling library that makes your variants rhyme — a first-class API for variants, slots, and design tokens. Inspired by Stitches.",
+  "keywords": [
+    "css",
+    "css-variables",
+    "design-system",
+    "design-tokens",
+    "typescript",
+    "variants"
+  ],
+  "homepage": "https://github.com/skordyr/varhyme#readme",
   "bugs": {
-    "url": "https://github.com/skordyr/varena/issues"
+    "url": "https://github.com/skordyr/varhyme/issues"
   },
   "license": "MIT",
   "author": "skordyr <xyan.sk@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/skordyr/varena.git"
+    "url": "git+https://github.com/skordyr/varhyme.git"
   },
   "files": [
     "dist",
@@ -32,10 +40,10 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.31.1",
-    "oxfmt": "^0.60.0",
-    "oxlint": "^1.75.0",
+    "oxfmt": "^0.62.0",
+    "oxlint": "^1.77.0",
     "tsdown": "^0.22.14",
     "typescript": "^7.0.2"
   },
-  "packageManager": "pnpm@11.17.0"
+  "packageManager": "pnpm@11.21.0"
 }

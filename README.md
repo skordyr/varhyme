@@ -1,24 +1,24 @@
-# varena
+# varhyme
 
-A framework-agnostic, type-safe styling library for building component variants and design tokens, with first-class slots support. Inspired by [Stitches](https://stitches.dev/).
+A framework-agnostic, type-safe styling library that makes your variants rhyme — a _first-class_ API for variants, slots, and design tokens. Inspired by [Stitches](https://stitches.dev/).
 
-## Features
+## Highlights
 
-- Framework agnostic: works anywhere you can use plain strings and style objects.
-- Type-safe variants: strongly typed variant names and values.
-- Slot-based components: define slot classes for `root`, `icon`, `label`, and any custom slot.
-- Compound variants: apply slot classes when multiple variant conditions match.
-- Design tokens: generate CSS custom properties and `var(...)` references with types.
-- Tiny utilities: `cx` for class merging and `sx` for style merging.
+- 🌐 **Framework Agnostic:** plain strings and style objects, in any framework or runtime.
+- 🛡️ **Type Safe:** fully typed variants, slots, and design tokens.
+- 🧬 **Variants:** typed variant names and values, with compound variants for multi-condition matching.
+- 🧩 **Slots:** slot classes for any named slot, where `root` names the root node.
+- 🎨 **Design Tokens:** typed CSS custom properties with `var(...)` references and an optional design system foundation to extend (`varhyme/design-system`).
+- ⚡ **Utilities:** `cx` for class merging and `sx` for style merging.
 
 ## Installation
 
 ```bash
-pnpm add varena
+pnpm add varhyme
 # or
-npm install varena
+npm install varhyme
 # or
-yarn add varena
+yarn add varhyme
 ```
 
 ## Quick Start
@@ -28,19 +28,19 @@ yarn add varena
 ```
 project/
 ├── lib/
-│   └── varena.ts          # varena instance with twMerge
+│   └── varhyme.ts          # varhyme instance with twMerge
 └── components/
-    └── button.tsx         # button component + styles
+    └── button.tsx          # button component + styles
 ```
 
 ```bash
-pnpm add varena tailwind-merge
+pnpm add varhyme tailwind-merge
 ```
 
 ```ts
-// lib/varena.ts
-import { create } from "varena";
+// lib/varhyme.ts
 import { twMerge } from "tailwind-merge";
+import { create } from "varhyme";
 
 export const { createStyles, createTokens } = create({
   mergeClasses: twMerge,
@@ -49,12 +49,13 @@ export const { createStyles, createTokens } = create({
 
 ```tsx
 // components/button.tsx
-import type { InferComponentStylesConfig } from "varena";
+import type { InferComponentStylesConfig } from "varhyme";
 
 import * as React from "react";
+import { cx } from "varhyme";
 
 // Note: `@/` is a path alias, use your project's import path
-import { createStyles, cx } from "@/lib/varena";
+import { createStyles } from "@/lib/varhyme";
 
 const ButtonStyles = createStyles({
   slots: {
@@ -159,12 +160,13 @@ project/
 ```
 
 ```bash
-pnpm add varena @emotion/css
+pnpm add varhyme @emotion/css
 ```
 
 ```ts
 // styles/theme.ts
-import { ColorTokens } from "varena/design-system";
+import { createTokens } from "varhyme";
+import { ColorTokens } from "varhyme/design-system";
 
 // Extend tokens for a custom theme
 export const ThemeTokens = createTokens({ ...ColorTokens.definition });
@@ -199,7 +201,7 @@ css`
 // scripts/generate-theme-css.ts
 import * as fs from "node:fs/promises";
 
-import type { ColorSystem } from "varena/design-system";
+import type { ColorSystem } from "varhyme/design-system";
 
 // Note: `@/` is a path alias, use your project's import path
 import { ThemeTokens } from "@/styles/theme";
@@ -227,7 +229,7 @@ ${ThemeTokens.css(":root")}
 @import "tw-animate-css";
 
 /* Import generated theme tokens */
-@import "styles/theme.css";
+@import "../styles/theme.css";
 ```
 
 ```tsx
@@ -239,13 +241,13 @@ ${ThemeTokens.css(":root")}
 
 ## API Reference
 
-### varena
+### varhyme
 
-Core styling utilities providing type-safe APIs for building component variants and design tokens.
+Core styling utilities providing type-safe APIs for building component variants, slots, and design tokens.
 
 #### `create(options?)`
 
-Create a preconfigured varena instance so `createStyles` and `createTokens` share defaults.
+Create a preconfigured instance so `createStyles` and `createTokens` share defaults.
 
 **Parameters**
 
@@ -261,8 +263,8 @@ Create a preconfigured varena instance so `createStyles` and `createTokens` shar
 **Examples**
 
 ```ts
-import { create } from "varena";
 import { twMerge } from "tailwind-merge";
+import { create } from "varhyme";
 
 export const { createStyles, createTokens } = create({
   mergeClasses: twMerge,
@@ -298,8 +300,9 @@ Create a typed slot styles factory for slot-based components with variants, comp
 **Examples**
 
 ```ts
-import type { InferComponentStylesConfig } from "varena";
-import { createStyles } from "varena";
+import type { InferComponentStylesConfig } from "varhyme";
+
+import { createStyles } from "varhyme";
 
 export const ButtonStyles = createStyles({
   slots: {
@@ -454,7 +457,7 @@ PricingButtonStyles.slots;
 
 #### `createTokens(tokens, options?)`
 
-Create a typed token factory for generating CSS custom properties and `var(...)` helpers.
+Create a typed token factory for generating CSS custom properties and `var(...)` references.
 
 **Parameters**
 
@@ -499,8 +502,9 @@ Create a typed token factory for generating CSS custom properties and `var(...)`
 **Examples**
 
 ```ts
-import type { InferTokensConfig } from "varena";
-import { createTokens } from "varena";
+import type { InferTokensConfig } from "varhyme";
+
+import { createTokens } from "varhyme";
 
 export const ThemeTokens = createTokens<{
   "color.primary": string;
@@ -658,7 +662,7 @@ CustomThemeTokens.value("color.secondary");
 
 #### `cx(...classes)`
 
-Merge class names and ignore falsy `undefined` entries.
+Merge class names and ignore `undefined` entries.
 
 **Parameters**
 
@@ -671,7 +675,7 @@ Merge class names and ignore falsy `undefined` entries.
 **Examples**
 
 ```ts
-import { cx } from "varena";
+import { cx } from "varhyme";
 
 cx("btn", undefined, "btn--primary", "rounded-md");
 // => "btn btn--primary rounded-md"
@@ -692,7 +696,7 @@ Merge style objects and ignore `undefined` entries.
 **Examples**
 
 ```ts
-import { sx } from "varena";
+import { sx } from "varhyme";
 
 sx({ padding: "8px", borderRadius: "8px" }, undefined, { padding: "12px", color: "white" });
 // => { padding: "12px", borderRadius: "8px", color: "white" }
@@ -713,7 +717,7 @@ Type guard to check if a value is a `Styles` instance.
 **Examples**
 
 ```ts
-import { isStyles, createStyles } from "varena";
+import { isStyles, createStyles } from "varhyme";
 
 const ButtonStyles = createStyles({ slots: { root: "btn" } });
 
@@ -742,7 +746,7 @@ Type guard to check if a value is a `Tokens` instance.
 **Examples**
 
 ```ts
-import { isTokens, createTokens } from "varena";
+import { isTokens, createTokens } from "varhyme";
 
 const ThemeTokens = createTokens({ "color.primary": "#0ea5e9" });
 
@@ -771,7 +775,7 @@ Infers the full `createStyles` call config type.
 **Examples**
 
 ```ts
-import type { InferStylesConfig } from "varena";
+import type { InferStylesConfig } from "varhyme";
 
 export type ButtonStylesConfig = InferStylesConfig<typeof ButtonStyles>;
 // => {
@@ -796,7 +800,7 @@ Extracts matching slot keys from the `createStyles` config type.
 **Examples**
 
 ```ts
-import type { ExtractStylesConfig } from "varena";
+import type { ExtractStylesConfig } from "varhyme";
 
 export type IconOnlyButtonStylesConfig = ExtractStylesConfig<typeof ButtonStyles, "icon">;
 // => {
@@ -821,7 +825,7 @@ Excludes matching slot keys from the `createStyles` config type.
 **Examples**
 
 ```ts
-import type { ExcludeStylesConfig } from "varena";
+import type { ExcludeStylesConfig } from "varhyme";
 
 export type WithoutIconButtonStylesConfig = ExcludeStylesConfig<typeof ButtonStyles, "icon">;
 // => {
@@ -845,7 +849,7 @@ Infers a component-friendly flattened style config type.
 **Examples**
 
 ```ts
-import type { InferComponentStylesConfig } from "varena";
+import type { InferComponentStylesConfig } from "varhyme";
 
 export type ButtonStylesConfig = InferComponentStylesConfig<typeof ButtonStyles>;
 // => {
@@ -871,7 +875,7 @@ Extracts a component-friendly config type with only matching slots and flattened
 **Examples**
 
 ```ts
-import type { ExtractComponentStylesConfig } from "varena";
+import type { ExtractComponentStylesConfig } from "varhyme";
 
 export type IconOnlyButtonStylesConfig = ExtractComponentStylesConfig<typeof ButtonStyles, "icon">;
 // => {
@@ -897,7 +901,7 @@ Excludes a component-friendly config type with excluded slots and flattened vari
 **Examples**
 
 ```ts
-import type { ExcludeComponentStylesConfig } from "varena";
+import type { ExcludeComponentStylesConfig } from "varhyme";
 
 export type WithoutIconButtonStylesConfig = ExcludeComponentStylesConfig<
   typeof ButtonStyles,
@@ -925,13 +929,13 @@ Infers the config shape accepted by a `Tokens(config)` call.
 **Examples**
 
 ```ts
-import type { InferTokensConfig } from "varena";
+import type { InferTokensConfig } from "varhyme";
 
 export type ThemeTokensConfig = InferTokensConfig<typeof ThemeTokens>;
 // => { "color.primary"?: string; "color.border"?: string; "radius.md"?: string; "border"?: string }
 ```
 
-### varena/design-system
+### varhyme/design-system
 
 Design token systems for consistent foundations.
 

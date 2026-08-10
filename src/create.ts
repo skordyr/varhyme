@@ -6,7 +6,7 @@ import { createStyles } from "./styles";
 import { createTokens } from "./tokens";
 import { sx } from "./utils";
 
-export interface Varena {
+export interface Varhyme {
   createTokens: typeof createTokens;
   createStyles: typeof createStyles;
 }
@@ -16,7 +16,7 @@ export interface CreateOptions
     Pick<CreateTokensOptions, "createVariableName">,
     Pick<CreateStylesOptions, "mergeClasses"> {}
 
-export function create(options: CreateOptions = EMPTY_OBJECT): Varena {
+export function create(options: CreateOptions = EMPTY_OBJECT): Varhyme {
   const { createVariableName, mergeClasses } = options;
 
   return {

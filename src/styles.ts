@@ -141,7 +141,7 @@ export type ExcludeComponentStylesConfig<
   Pick<ExcludeStylesConfig<TStyles, TRules>, "slots"> & InferStylesConfig<TStyles>["variants"]
 >;
 
-const STYLES_BRAND = Symbol("varena.styles");
+const STYLES_BRAND = Symbol("varhyme.styles");
 
 export function isStyles(target: unknown): target is Styles<any, any> {
   const candidate = target as { [STYLES_BRAND]: true };
