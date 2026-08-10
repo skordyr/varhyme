@@ -1,5 +1,11 @@
 # varhyme
 
+## 0.5.0
+
+### Minor Changes
+
+- 61b3152: refactor!: :recycle: rename package from `varena` to `varhyme`, and the public `Varena` interface to `Varhyme`
+
 ## 0.4.14
 
 ### Patch Changes
