@@ -39,11 +39,11 @@
     "prepublishOnly": "pnpm build"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.31.1",
-    "oxfmt": "^0.62.0",
-    "oxlint": "^1.77.0",
+    "@changesets/cli": "^3.0.0",
+    "oxfmt": "^0.63.0",
+    "oxlint": "^1.78.0",
     "tsdown": "^0.22.14",
     "typescript": "^7.0.2"
   },
-  "packageManager": "pnpm@11.21.0"
+  "packageManager": "pnpm@11.22.0"
 }
