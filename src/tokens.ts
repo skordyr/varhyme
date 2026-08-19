@@ -55,7 +55,7 @@ export type TokenPropertyConfig<TTokensValue extends TokensValue> = {
 export type TokensConfig<TTokensValue extends TokensValue> = Partial<TTokensValue>;
 
 export interface Tokens<TTokensValue extends TokensValue> {
-  (config: TokensConfig<TTokensValue>): TokensStyle;
+  (config?: TokensConfig<TTokensValue>): TokensStyle;
   definition: TTokensValue;
   style: TokensStyle;
   css(): string;
@@ -129,7 +129,7 @@ export function createTokens<TTokensValue extends TokensValue>(
     });
   }
 
-  function create(config: TokensConfig<TTokensValue>): TokensStyle {
+  function create(config: TokensConfig<TTokensValue> = tokens): TokensStyle {
     const style: TokensStyle = {};
 
     for (const [key, value] of Object.entries(config)) {
@@ -263,13 +263,13 @@ export function createTokens<TTokensValue extends TokensValue>(
 
   let _style: TokensStyle;
 
-  function createStyle(config: TokensConfig<TTokensValue>): TokensStyle {
-    if (config !== tokens) {
+  function createStyle(config?: TokensConfig<TTokensValue>): TokensStyle {
+    if (config && config !== tokens) {
       return create(config);
     }
 
     if (!_style) {
-      _style = create(config);
+      _style = create();
     }
 
     return _style;
@@ -291,7 +291,7 @@ export function createTokens<TTokensValue extends TokensValue>(
 
   Object.defineProperty(createStyle, "style", {
     get() {
-      return createStyle(tokens);
+      return createStyle();
     },
   });
 

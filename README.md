@@ -332,37 +332,50 @@ export const ButtonStyles = createStyles({
 });
 
 export type ButtonStylesConfig = InferComponentStylesConfig<typeof ButtonStyles>;
-// => {
-//   slots?: { root?: string; icon?: string } | ...;
-//   size?: "sm" | "lg";
-//   tone?: "neutral" | "danger";
-// }
+/// {
+///   slots?:
+///     | {
+///         root?: string;
+///         icon?: string;
+///       }
+///     | ...;
+///   size?: "sm" | "lg";
+///   tone?: "neutral" | "danger";
+/// }
 ```
 
 ```ts
 ButtonStyles.definition;
-// => { slots: {...}, variants: {...}, compoundVariants: [...], defaultVariants: {...} }
+/// {
+///   slots: {...},
+///   variants: {...},
+///   compoundVariants: [...],
+///   defaultVariants: {...},
+/// }
 
 ButtonStyles.slots;
-// => { root: "btn btn--sm btn--neutral", icon: "btn__icon btn__icon--sm" }
+/// {
+///   root: "btn btn--sm btn--neutral",
+///   icon: "btn__icon btn__icon--sm",
+/// }
 
 const slots = ButtonStyles();
 
 slots.root;
-// => "btn btn--sm btn--neutral"
+/// "btn btn--sm btn--neutral"
 
 slots.icon;
-// => "btn__icon btn__icon--sm"
+/// "btn__icon btn__icon--sm"
 ```
 
 ```ts
 const slots = ButtonStyles({ variants: { size: "lg", tone: "danger" } });
 
 slots.root;
-// => "btn btn--lg btn--danger btn--lg-danger"
+/// "btn btn--lg btn--danger btn--lg-danger"
 
 slots.icon;
-// => "btn__icon btn__icon--lg"
+/// "btn__icon btn__icon--lg"
 ```
 
 ```ts
@@ -372,10 +385,10 @@ const slots = ButtonStyles(
 );
 
 slots.root;
-// => "btn btn--lg btn--neutral override-root"
+/// "btn btn--lg btn--neutral override-root"
 
 slots.icon;
-// => "btn__icon btn__icon--lg custom-icon"
+/// "btn__icon btn__icon--lg custom-icon"
 ```
 
 ```ts
@@ -385,10 +398,10 @@ const slots = ButtonStyles(
 );
 
 slots.root;
-// => "btn btn--lg btn--neutral override-root"
+/// "btn btn--lg btn--neutral override-root"
 
 slots.icon;
-// => "btn__icon btn__icon--lg custom-icon"
+/// "btn__icon btn__icon--lg custom-icon"
 ```
 
 ```ts
@@ -400,7 +413,7 @@ const slots = ButtonStyles({
 });
 
 slots.root;
-// => "btn btn--sm btn--danger btn--ring"
+/// "btn btn--sm btn--danger btn--ring"
 ```
 
 ```ts
@@ -433,26 +446,79 @@ const PricingButtonStyles = ButtonStyles.extend({
 });
 
 PricingButtonStyles.definition;
-// => {
-//   slots: { root: "btn pricing-btn", icon: "btn__icon", badge: "pricing-btn__badge" },
-//   variants: {
-//     size: {
-//       sm: { root: "btn--sm", icon: "btn__icon--sm" },
-//       lg: { root: "btn--lg pricing-btn--lg", icon: "btn__icon--lg pricing-btn__icon--lg" },
-//       xl: { root: "pricing-btn--xl", icon: "pricing-btn__icon--xl" },
-//     },
-//     tone: { neutral: { root: "btn--neutral" }, danger: { root: "btn--danger" } },
-//     tier: { starter: { root: "pricing-btn--starter" }, pro: { root: "pricing-btn--pro" } },
-//   },
-//   compoundVariants: [
-//     { variants: { size: "lg", tone: "danger" }, slots: { root: "btn--lg-danger pricing-btn--lg-danger", badge: "pricing-btn__badge--danger" } },
-//     { variants: { size: "xl", tier: "pro" }, slots: { root: "pricing-btn--hero", badge: "pricing-btn__badge--hero" } },
-//   ],
-//   defaultVariants: { size: "lg", tone: "neutral", tier: "pro" },
-// }
+/// {
+///   slots: {
+///     root: "btn pricing-btn",
+///     icon: "btn__icon",
+///     badge: "pricing-btn__badge",
+///   },
+///   variants: {
+///     size: {
+///       sm: {
+///         root: "btn--sm",
+///         icon: "btn__icon--sm",
+///       },
+///       lg: {
+///         root: "btn--lg pricing-btn--lg",
+///         icon: "btn__icon--lg pricing-btn__icon--lg",
+///       },
+///       xl: {
+///         root: "pricing-btn--xl",
+///         icon: "pricing-btn__icon--xl",
+///       },
+///     },
+///     tone: {
+///       neutral: {
+///         root: "btn--neutral",
+///       },
+///       danger: {
+///         root: "btn--danger",
+///       },
+///     },
+///     tier: {
+///       starter: {
+///         root: "pricing-btn--starter",
+///       },
+///       pro: {
+///         root: "pricing-btn--pro",
+///       },
+///     },
+///   },
+///   compoundVariants: [
+///     {
+///       variants: {
+///         size: "lg",
+///         tone: "danger",
+///       },
+///       slots: {
+///         root: "btn--lg-danger pricing-btn--lg-danger",
+///         badge: "pricing-btn__badge--danger",
+///       },
+///     },
+///     {
+///       variants: {
+///         size: "xl",
+///         tier: "pro",
+///       },
+///       slots: {
+///         root: "pricing-btn--hero",
+///         badge: "pricing-btn__badge--hero",
+///       },
+///     },
+///   ],
+///   defaultVariants: {
+///     size: "lg",
+///     tone: "neutral",
+///     tier: "pro",
+///   },
+/// }
 
 PricingButtonStyles.slots;
-// => { root: "btn pricing-btn btn--lg pricing-btn--lg btn--neutral pricing-btn--pro", icon: "btn__icon btn__icon--lg pricing-btn__icon--lg", badge: "pricing-btn__badge" }
+/// {
+///   root: "btn pricing-btn btn--lg pricing-btn--lg btn--neutral pricing-btn--pro",
+///   icon: "btn__icon btn__icon--lg pricing-btn__icon--lg",
+///   badge: "pricing-btn__badge",
+/// }
 ```
 
 #### `createTokens(tokens, options?)`
@@ -468,7 +534,7 @@ Create a typed token factory for generating CSS custom properties and `var(...)`
 
 **Returns**
 
-- `Tokens(config)` - Generates a style object with only the specified CSS custom property overrides.
+- `Tokens(config?)` - Generates a style object from full default token values, or from only the specified CSS custom property overrides when `config` is provided.
 
   > Token values may contain `{key[?? fallback]}` references.
   >
@@ -497,7 +563,7 @@ Create a typed token factory for generating CSS custom properties and `var(...)`
 
 **Call-time Parameters**
 
-- `config` - Partial token overrides to generate a style object for a specific context.
+- `config?` - Partial token overrides to generate a style object for a specific context. Defaults to the full token definition.
 
 **Examples**
 
@@ -521,114 +587,125 @@ export const ThemeTokens = createTokens<{
 );
 
 export type ThemeTokensConfig = InferTokensConfig<typeof ThemeTokens>;
-// => { "color.primary"?: string; "color.border"?: string; "radius.md"?: string; "border"?: string }
+/// {
+///   "color.primary"?: string;
+///   "color.border"?: string;
+///   "radius.md"?: string;
+///   border?: string
+/// }
 ```
 
 ```ts
 ThemeTokens.definition;
-// => { "color.primary": "#0ea5e9", "radius.md": "8px", border: "1px solid {color.border ?? #e5e7eb}" }
+/// {
+///   "color.primary": "#0ea5e9",
+///   "radius.md": "8px",
+///   border: "1px solid {color.border ?? #e5e7eb}",
+/// }
+
+ThemeTokens();
+/// {
+///   "--app-color-primary": "#0ea5e9",
+///   "--app-radius-md": "8px",
+///   "--app-border": "1px solid var(--app-color-border, #e5e7eb)",
+/// }
 
 ThemeTokens({});
-// => {}
+/// {}
 
 ThemeTokens({ "color.primary": "#0369a1" });
-// => { "--app-color-primary": "#0369a1" }
+/// {
+///   "--app-color-primary": "#0369a1",
+/// }
 
 ThemeTokens.style;
-// => {
-//   "--app-color-primary": "#0ea5e9",
-//   "--app-radius-md": "8px",
-//   "--app-border": "1px solid var(--app-color-border, #e5e7eb)",
-// }
+/// {
+///   "--app-color-primary": "#0ea5e9",
+///   "--app-radius-md": "8px",
+///   "--app-border": "1px solid var(--app-color-border, #e5e7eb)",
+/// }
 
 ThemeTokens.css();
-// =>
-// --app-color-primary: #0ea5e9;
-// --app-radius-md: 8px;
-// --app-border: 1px solid var(--app-color-border, #e5e7eb);
+/// --app-color-primary: #0ea5e9;
+/// --app-radius-md: 8px;
+/// --app-border: 1px solid var(--app-color-border, #e5e7eb);
 
 ThemeTokens.css(":root");
-// =>
-// :root {
-//   --app-color-primary: #0ea5e9;
-//   --app-radius-md: 8px;
-//   --app-border: 1px solid var(--app-color-border, #e5e7eb);
-// }
+/// :root {
+///   --app-color-primary: #0ea5e9;
+///   --app-radius-md: 8px;
+///   --app-border: 1px solid var(--app-color-border, #e5e7eb);
+/// }
 
 ThemeTokens.css(":root", "@layer theme");
-// =>
-// @layer theme {
-//   :root {
-//     --app-color-primary: #0ea5e9;
-//     --app-radius-md: 8px;
-//     --app-border: 1px solid var(--app-color-border, #e5e7eb);
-//   }
-// }
+/// @layer theme {
+///   :root {
+///     --app-color-primary: #0ea5e9;
+///     --app-radius-md: 8px;
+///     --app-border: 1px solid var(--app-color-border, #e5e7eb);
+///   }
+/// }
 
 ThemeTokens.css({ ...ThemeTokens.definition, "color.primary": "#f97316" });
-// =>
-// --app-color-primary: #f97316;
-// --app-radius-md: 8px;
-// --app-border: 1px solid var(--app-color-border, #e5e7eb);
+/// --app-color-primary: #f97316;
+/// --app-radius-md: 8px;
+/// --app-border: 1px solid var(--app-color-border, #e5e7eb);
 
 ThemeTokens.css({ ...ThemeTokens.definition, "color.primary": "#f97316" }, ":root");
-// =>
-// :root {
-//   --app-color-primary: #f97316;
-//   --app-radius-md: 8px;
-//   --app-border: 1px solid var(--app-color-border, #e5e7eb);
-// }
+/// :root {
+///   --app-color-primary: #f97316;
+///   --app-radius-md: 8px;
+///   --app-border: 1px solid var(--app-color-border, #e5e7eb);
+/// }
 
 ThemeTokens.css({ ...ThemeTokens.definition, "color.primary": "#f97316" }, ":root", "@layer theme");
-// =>
-// @layer theme {
-//   :root {
-//     --app-color-primary: #f97316;
-//     --app-radius-md: 8px;
-//     --app-border: 1px solid var(--app-color-border, #e5e7eb);
-//   }
-// }
+/// @layer theme {
+///   :root {
+///     --app-color-primary: #f97316;
+///     --app-radius-md: 8px;
+///     --app-border: 1px solid var(--app-color-border, #e5e7eb);
+///   }
+/// }
 
 ThemeTokens.css({});
-// => ""
+/// ""
 
 ThemeTokens.atProperties({
   "color.primary": { syntax: '"<color>"', inherits: true, initialValue: "#0ea5e9" },
   "radius.md": { syntax: '"<length>"', inherits: true, initialValue: "8px" },
 });
-// =>
-// @property --app-color-primary {
-//   syntax: "<color>";
-//   inherits: true;
-//   initial-value: #0ea5e9;
-// }
-//
-// @property --app-radius-md {
-//   syntax: "<length>";
-//   inherits: true;
-//   initial-value: 8px;
-// }
+/// @property --app-color-primary {
+///   syntax: "<color>";
+///   inherits: true;
+///   initial-value: #0ea5e9;
+/// }
+///
+/// @property --app-radius-md {
+///   syntax: "<length>";
+///   inherits: true;
+///   initial-value: 8px;
+/// }
 
 ThemeTokens.atProperties({});
-// => ""
+/// ""
 
 ThemeTokens.value("color.primary");
-// => "#0ea5e9"
+/// "#0ea5e9"
 
 ThemeTokens.value("color.border", "#e5e7eb");
-// => "#e5e7eb" (returns fallback since key not in definition)
+/// "#e5e7eb" (returns fallback since key not in definition)
 
 ThemeTokens.value("border");
-// => "1px solid var(--app-color-border, #e5e7eb)"
+/// "1px solid var(--app-color-border, #e5e7eb)"
 
 ThemeTokens.property("color.primary");
-// => "--app-color-primary"
+/// "--app-color-primary"
 
 ThemeTokens.variable("color.primary");
-// => "var(--app-color-primary)"
+/// "var(--app-color-primary)"
 
 ThemeTokens.variable("radius.md", "6px");
-// => "var(--app-radius-md, 6px)"
+/// "var(--app-radius-md, 6px)"
 ```
 
 ```ts
@@ -638,26 +715,37 @@ export const CustomThemeTokens = ThemeTokens.extend({
 });
 
 export type CustomThemeTokensConfig = InferTokensConfig<typeof CustomThemeTokens>;
-// => { "color.primary"?: string; "color.border"?: string; "radius.md"?: string; border?: string; "color.secondary"?: string }
+/// {
+///   "color.primary"?: string;
+///   "color.border"?: string;
+///   "radius.md"?: string;
+///   border?: string;
+///   "color.secondary"?: string
+/// }
 ```
 
 ```ts
 CustomThemeTokens.definition;
-// => { "color.primary": "#1e40af", "radius.md": "8px", border: "1px solid {color.border ?? #e5e7eb}", "color.secondary": "#475569" }
+/// {
+///   "color.primary": "#1e40af",
+///   "radius.md": "8px",
+///   border: "1px solid {color.border ?? #e5e7eb}",
+///   "color.secondary": "#475569",
+/// }
 
 CustomThemeTokens.style;
-// => {
-//   "--app-color-primary": "#1e40af",
-//   "--app-radius-md": "8px",
-//   "--app-border": "1px solid var(--app-color-border, #e5e7eb)",
-//   "--app-color-secondary": "#475569",
-// }
+/// {
+///   "--app-color-primary": "#1e40af",
+///   "--app-radius-md": "8px",
+///   "--app-border": "1px solid var(--app-color-border, #e5e7eb)",
+///   "--app-color-secondary": "#475569",
+/// }
 
 CustomThemeTokens.value("color.primary");
-// => "#1e40af"
+/// "#1e40af"
 
 CustomThemeTokens.value("color.secondary");
-// => "#475569"
+/// "#475569"
 ```
 
 #### `cx(...classes)`
@@ -678,7 +766,7 @@ Merge class names and ignore `undefined` entries.
 import { cx } from "varhyme";
 
 cx("btn", undefined, "btn--primary", "rounded-md");
-// => "btn btn--primary rounded-md"
+/// "btn btn--primary rounded-md"
 ```
 
 #### `sx(...styles)`
@@ -699,7 +787,11 @@ Merge style objects and ignore `undefined` entries.
 import { sx } from "varhyme";
 
 sx({ padding: "8px", borderRadius: "8px" }, undefined, { padding: "12px", color: "white" });
-// => { padding: "12px", borderRadius: "8px", color: "white" }
+/// {
+///   padding: "12px",
+///   borderRadius: "8px",
+///   color: "white",
+/// }
 ```
 
 #### `isStyles(target)`
@@ -722,13 +814,13 @@ import { isStyles, createStyles } from "varhyme";
 const ButtonStyles = createStyles({ slots: { root: "btn" } });
 
 isStyles(ButtonStyles);
-// => true
+/// true
 
 isStyles({});
-// => false
+/// false
 
 isStyles(null);
-// => false
+/// false
 ```
 
 #### `isTokens(target)`
@@ -751,13 +843,13 @@ import { isTokens, createTokens } from "varhyme";
 const ThemeTokens = createTokens({ "color.primary": "#0ea5e9" });
 
 isTokens(ThemeTokens);
-// => true
+/// true
 
 isTokens({});
-// => false
+/// false
 
 isTokens(null);
-// => false
+/// false
 ```
 
 #### `InferStylesConfig<TStyles>`
@@ -778,10 +870,18 @@ Infers the full `createStyles` call config type.
 import type { InferStylesConfig } from "varhyme";
 
 export type ButtonStylesConfig = InferStylesConfig<typeof ButtonStyles>;
-// => {
-//   slots?: { root?: string; icon?: string } | ...;
-//   variants?: { size?: "sm" | "lg"; tone?: "neutral" | "danger" };
-// }
+/// {
+///   slots?:
+///     | {
+///         root?: string;
+///         icon?: string;
+///       }
+///     | ...;
+///   variants?: {
+///     size?: "sm" | "lg";
+///     tone?: "neutral" | "danger";
+///   };
+/// }
 ```
 
 #### `ExtractStylesConfig<TStyles, TRules>`
@@ -803,10 +903,17 @@ Extracts matching slot keys from the `createStyles` config type.
 import type { ExtractStylesConfig } from "varhyme";
 
 export type IconOnlyButtonStylesConfig = ExtractStylesConfig<typeof ButtonStyles, "icon">;
-// => {
-//   slots?: { icon?: string } | ...;
-//   variants?: { size?: "sm" | "lg"; tone?: "neutral" | "danger" };
-// }
+/// {
+///   slots?:
+///     | {
+///         icon?: string;
+///       }
+///     | ...;
+///   variants?: {
+///     size?: "sm" | "lg";
+///     tone?: "neutral" | "danger";
+///   };
+/// }
 ```
 
 #### `ExcludeStylesConfig<TStyles, TRules>`
@@ -828,10 +935,17 @@ Excludes matching slot keys from the `createStyles` config type.
 import type { ExcludeStylesConfig } from "varhyme";
 
 export type WithoutIconButtonStylesConfig = ExcludeStylesConfig<typeof ButtonStyles, "icon">;
-// => {
-//   slots?: { root?: string } | ...;
-//   variants?: { size?: "sm" | "lg"; tone?: "neutral" | "danger" };
-// }
+/// {
+///   slots?:
+///     | {
+///         root?: string;
+///       }
+///     | ...;
+///   variants?: {
+///     size?: "sm" | "lg";
+///     tone?: "neutral" | "danger";
+///   };
+/// }
 ```
 
 #### `InferComponentStylesConfig<TStyles>`
@@ -852,11 +966,16 @@ Infers a component-friendly flattened style config type.
 import type { InferComponentStylesConfig } from "varhyme";
 
 export type ButtonStylesConfig = InferComponentStylesConfig<typeof ButtonStyles>;
-// => {
-//   slots?: { root?: string; icon?: string } | ...;
-//   size?: "sm" | "lg";
-//   tone?: "neutral" | "danger";
-// }
+/// {
+///   slots?:
+///     | {
+///         root?: string;
+///         icon?: string;
+///       }
+///     | ...;
+///   size?: "sm" | "lg";
+///   tone?: "neutral" | "danger";
+/// }
 ```
 
 #### `ExtractComponentStylesConfig<TStyles, TRules>`
@@ -878,11 +997,15 @@ Extracts a component-friendly config type with only matching slots and flattened
 import type { ExtractComponentStylesConfig } from "varhyme";
 
 export type IconOnlyButtonStylesConfig = ExtractComponentStylesConfig<typeof ButtonStyles, "icon">;
-// => {
-//   slots?: { icon?: string } | ...;
-//   size?: "sm" | "lg";
-//   tone?: "neutral" | "danger";
-// }
+/// {
+///   slots?:
+///     | {
+///         icon?: string;
+///       }
+///     | ...;
+///   size?: "sm" | "lg";
+///   tone?: "neutral" | "danger";
+/// }
 ```
 
 #### `ExcludeComponentStylesConfig<TStyles, TRules>`
@@ -907,11 +1030,15 @@ export type WithoutIconButtonStylesConfig = ExcludeComponentStylesConfig<
   typeof ButtonStyles,
   "icon"
 >;
-// => {
-//   slots?: { root?: string } | ...;
-//   size?: "sm" | "lg";
-//   tone?: "neutral" | "danger";
-// }
+/// {
+///   slots?:
+///     | {
+///         root?: string;
+///       }
+///     | ...;
+///   size?: "sm" | "lg";
+///   tone?: "neutral" | "danger";
+/// }
 ```
 
 #### `InferTokensConfig<TTokens>`
@@ -932,7 +1059,12 @@ Infers the config shape accepted by a `Tokens(config)` call.
 import type { InferTokensConfig } from "varhyme";
 
 export type ThemeTokensConfig = InferTokensConfig<typeof ThemeTokens>;
-// => { "color.primary"?: string; "color.border"?: string; "radius.md"?: string; "border"?: string }
+/// {
+///   "color.primary"?: string;
+///   "color.border"?: string;
+///   "radius.md"?: string;
+///   border?: string
+/// }
 ```
 
 ### varhyme/design-system
