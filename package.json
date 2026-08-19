@@ -1,6 +1,6 @@
 {
   "name": "varhyme",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "A framework-agnostic, type-safe styling library that makes your variants rhyme — a first-class API for variants, slots, and design tokens. Inspired by Stitches.",
   "keywords": [
     "css",

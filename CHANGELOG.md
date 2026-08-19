@@ -1,5 +1,11 @@
 # varhyme
 
+## 0.5.1
+
+### Patch Changes
+
+- 99504f4: feat(tokens): :sparkles: make `Tokens(config?)` optional, so calling `Tokens()` with no config returns the full default token style object
+
 ## 0.5.0
 
 ### Minor Changes
